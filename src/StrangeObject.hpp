@@ -37,6 +37,13 @@ private:
 public:
     StrangeObject();
     StrangeObject(string, float, float, float, float);
+    
+    //construtor clone
+    StrangeObject(const &StrangeObject clone);
+    
+    //construtor movimentação
+	StrangeObject::StrangeObject(const &&StrangeObject move);
+    
     virtual ~StrangeObject();
     
     int howManyInstances();
@@ -46,6 +53,7 @@ public:
     StrangeObject operator+(StrangeObject);
     StrangeObject& operator+=(const StrangeObject &);
     bool operator <(const StrangeObject&);
+    void setIdentityMatrix();
     
 };
 

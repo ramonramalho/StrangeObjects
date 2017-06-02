@@ -34,6 +34,47 @@ StrangeObject::StrangeObject() {
     this->dataSet[1][1] = 0.0f;
 }
 
+/**
+ *	Construtor de copia
+ */
+
+StrangeObject::StrangeObject(const &StrangeObject clone){
+	 // Incrementar o contador de instâncias estático, que é compartilhado por
+    //  todas as instâncias de StrangeObject
+    globalCount++;
+	
+	this->localID = clone->localID;
+	this->text = clone->text;
+	this->dataSet[0][0] = clone->dataSet[0][0];
+    this->dataSet[0][1] = clone->dataSet[0][1];
+    this->dataSet[1][0] = clone->dataSet[1][0];
+    this->dataSet[1][1] = clone->dataSet[1][1];
+}
+
+/**
+ *	Construtor de movimentação
+ *  
+ *  A diferença para o construtor de cópia é que nesse caso o StrangeObject passado
+ *  por referência é copiado para o atual e é alterado para os valores padrão
+ */
+
+StrangeObject::StrangeObject(const &&StrangeObject move){
+	
+	this->localID = move->localID;
+	this->text = move->text;
+	this->dataSet[0][0] = move->dataSet[0][0];
+    this->dataSet[0][1] = move->dataSet[0][1];
+    this->dataSet[1][0] = move->dataSet[1][0];
+    this->dataSet[1][1] = move->dataSet[1][1];
+    
+    move->localID = 0;
+    move->text = "";
+    move->dataSet[0][0] = 0.0f;
+    move->dataSet[0][1] = 0.0f;
+    move->dataSet[1][0] = 0.0f;
+    move->dataSet[1][1] = 0.0f;
+}
+
 StrangeObject::StrangeObject(string text, float e00, float e01, float e10, float e11) {
     // Incrementar o contador de instâncias estático, que é compartilhado por
     //  todas as instâncias de StrangeObject
@@ -58,6 +99,17 @@ StrangeObject::~StrangeObject() {
     this->dataSet[0][1] = 0.0f;
     this->dataSet[1][0] = 0.0f;
     this->dataSet[1][1] = 0.0f;
+}
+
+/**
+ *Cria a matriz identidade em dataset
+ *
+ */
+void StrangeObject::setIdentityMatrix(){
+	this->dataSet[0][0] = 1.0f;
+    this->dataSet[0][1] = 0.0f;
+    this->dataSet[1][0] = 0.0f;
+    this->dataSet[1][1] = 1.0f;
 }
 
 /**
