@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-/* 
+/*
  * File:   StrangeObject.hpp
  * Author: andre
  *
@@ -28,34 +28,34 @@ private:
      *  deverá decrementar 1
      */
     static int   globalCount;
-    
+
     static int   globalPool;
     int          localID;
     double       dataSet[2][2];
     string       text;
-    
+
 public:
     StrangeObject();
     StrangeObject(string, float, float, float, float);
-    
+
     //construtor clone
-    StrangeObject(const &StrangeObject clone);
-    
+    StrangeObject(const StrangeObject& clone);
+
     //construtor movimentação
-	StrangeObject::StrangeObject(const &&StrangeObject move);
-    
+	  StrangeObject(StrangeObject&& move);
+
     virtual ~StrangeObject();
-    
+
     int howManyInstances();
     int getLocalID();
     string toString();
     StrangeObject operator=(StrangeObject);
     StrangeObject operator+(StrangeObject);
+    StrangeObject operator-(StrangeObject);
     StrangeObject& operator+=(const StrangeObject &);
     bool operator <(const StrangeObject&);
     void setIdentityMatrix();
-    
+
 };
 
 #endif /* STRANGEOBJECT_HPP */
-

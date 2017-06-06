@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 
-/* 
+/*
  * File:   StrangeObject.cpp
  * Author: andre
- * 
+ *
  * Created on May 22, 2016, 5:12 PM
  */
 
@@ -25,7 +25,7 @@ StrangeObject::StrangeObject() {
     // Incrementar o contador de instâncias estático, que é compartilhado por
     //  todas as instâncias de StrangeObject
     globalCount++;
-    
+
     this->localID = globalPool++;
     this->text = Info::getInstitution();
     this->dataSet[0][0] = 0.0f;
@@ -37,49 +37,47 @@ StrangeObject::StrangeObject() {
 /**
  *	Construtor de copia
  */
-
-StrangeObject::StrangeObject(const &StrangeObject clone){
+StrangeObject::StrangeObject(const StrangeObject& clone){
 	 // Incrementar o contador de instâncias estático, que é compartilhado por
     //  todas as instâncias de StrangeObject
     globalCount++;
-	
-	this->localID = clone->localID;
-	this->text = clone->text;
-	this->dataSet[0][0] = clone->dataSet[0][0];
-    this->dataSet[0][1] = clone->dataSet[0][1];
-    this->dataSet[1][0] = clone->dataSet[1][0];
-    this->dataSet[1][1] = clone->dataSet[1][1];
+
+    this->localID = clone.localID;
+    this->text = clone.text;
+    this->dataSet[0][0] = clone.dataSet[0][0];
+    this->dataSet[0][1] = clone.dataSet[0][1];
+    this->dataSet[1][0] = clone.dataSet[1][0];
+    this->dataSet[1][1] = clone.dataSet[1][1];
 }
 
 /**
- *	Construtor de movimentação
- *  
+ *	Construtor de movimentação (compila apenas com C++11) -std=c++11
+ *
  *  A diferença para o construtor de cópia é que nesse caso o StrangeObject passado
  *  por referência é copiado para o atual e é alterado para os valores padrão
  */
+StrangeObject::StrangeObject(StrangeObject&& move){
 
-StrangeObject::StrangeObject(const &&StrangeObject move){
-	
-	this->localID = move->localID;
-	this->text = move->text;
-	this->dataSet[0][0] = move->dataSet[0][0];
-    this->dataSet[0][1] = move->dataSet[0][1];
-    this->dataSet[1][0] = move->dataSet[1][0];
-    this->dataSet[1][1] = move->dataSet[1][1];
-    
-    move->localID = 0;
-    move->text = "";
-    move->dataSet[0][0] = 0.0f;
-    move->dataSet[0][1] = 0.0f;
-    move->dataSet[1][0] = 0.0f;
-    move->dataSet[1][1] = 0.0f;
+  	this->localID = move.localID;
+  	this->text = move.text;
+  	this->dataSet[0][0] = move.dataSet[0][0];
+    this->dataSet[0][1] = move.dataSet[0][1];
+    this->dataSet[1][0] = move.dataSet[1][0];
+    this->dataSet[1][1] = move.dataSet[1][1];
+
+    move.localID = 0;
+    move.text = "";
+    move.dataSet[0][0] = 0.0f;
+    move.dataSet[0][1] = 0.0f;
+    move.dataSet[1][0] = 0.0f;
+    move.dataSet[1][1] = 0.0f;
 }
 
 StrangeObject::StrangeObject(string text, float e00, float e01, float e10, float e11) {
     // Incrementar o contador de instâncias estático, que é compartilhado por
     //  todas as instâncias de StrangeObject
     globalCount++;
-    
+
     this->localID = globalPool++;
     this->text = text;
     this->dataSet[0][0] = e00;
@@ -92,7 +90,7 @@ StrangeObject::~StrangeObject() {
     // Decrementar o contador de instâncias estático, que é compartilhado por
     //  todas as instâncias de StrangeObject
     globalCount--;
-    
+
     this->localID = 0;
     this->text = "";
     this->dataSet[0][0] = 0.0f;
@@ -157,10 +155,20 @@ StrangeObject& StrangeObject::operator+=(const StrangeObject& value) {
 StrangeObject StrangeObject::operator+(StrangeObject value) {
     StrangeObject buffer;
     buffer.text = this->text + "; " + value.text;
-    buffer.dataSet[0][0] = this->dataSet[0][0] += value.dataSet[0][0];
-    buffer.dataSet[0][1] = this->dataSet[0][1] += value.dataSet[0][1];
-    buffer.dataSet[1][0] = this->dataSet[1][0] += value.dataSet[1][0];
-    buffer.dataSet[1][1] = this->dataSet[1][1] += value.dataSet[1][1];
+    buffer.dataSet[0][0] = this->dataSet[0][0] + value.dataSet[0][0];
+    buffer.dataSet[0][1] = this->dataSet[0][1] + value.dataSet[0][1];
+    buffer.dataSet[1][0] = this->dataSet[1][0] + value.dataSet[1][0];
+    buffer.dataSet[1][1] = this->dataSet[1][1] + value.dataSet[1][1];
+    return (buffer);
+}
+
+StrangeObject StrangeObject::operator-(StrangeObject value) {
+    StrangeObject buffer;
+    buffer.text = this->text + "; " + value.text;
+    buffer.dataSet[0][0] = this->dataSet[0][0] - value.dataSet[0][0];
+    buffer.dataSet[0][1] = this->dataSet[0][1] - value.dataSet[0][1];
+    buffer.dataSet[1][0] = this->dataSet[1][0] - value.dataSet[1][0];
+    buffer.dataSet[1][1] = this->dataSet[1][1] - value.dataSet[1][1];
     return (buffer);
 }
 
