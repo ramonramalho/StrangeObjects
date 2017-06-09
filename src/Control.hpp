@@ -26,11 +26,7 @@ private:
     static const int REFERENCE = 8;
     string progName;
     vector<StrangeObject *> dataArray;
-   
-public:
-    Control(string);
-    virtual ~Control();
-    void start(); 
+    
     
     void compareObjectsWith(StrangeObject& value);
     
@@ -41,6 +37,13 @@ public:
     void multiplyObjectsBy(StrangeObject& value);
     
     void setIdentityMatrix(int objectIndex);
+    
+    int showMenu();
+   
+public:
+    Control(string);
+    virtual ~Control();
+    void start(); 
 
 };
 
