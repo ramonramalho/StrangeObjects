@@ -36,7 +36,7 @@ private:
     
     void multiplyObjectsBy(StrangeObject& value);
     
-    void setIdentityMatrix(int objectIndex);
+    void setIdentityMatrix();
     
     int showMenu();
    

@@ -68,23 +68,47 @@ void Control::addToObjects(StrangeObject& value){
   for(int count = dataArray.size() - 1 ; count >= 0; --count)
   {
      (*dataArray[count]) = ((*dataArray[count]) + (value));
-     cout << "Modified: " << dataArray[count]->toString() << endl;
+     cout << "Modified: " << *dataArray[count] << endl;
   }
 }
 
 // Somar um objeto de todos os objetos na classe
 void Control::subtractFromObjects(StrangeObject& value){
-  // TODO
+  cout << " Modifying objects..." << endl << endl;
+  cout << "Ref: " << value << endl << endl;
+  
+  for(int count = dataArray.size() - 1 ; count >= 0; --count)
+  {
+     (*dataArray[count]) -= value;
+     cout << "Modified: " << *dataArray[count] << endl;
+  }
 }
 
 // Multiplicar os objetos por um outro objeto
 void Control::multiplyObjectsBy(StrangeObject& value){
-  // TODO
+  cout << " Modifying objects..." << endl << endl;
+  cout << "Ref: " << value << endl << endl;
+  
+  for(int count = dataArray.size() - 1 ; count >= 0; --count)
+  {
+     (*dataArray[count]) *= value;
+     cout << "Modified: " << *dataArray[count] << endl;
+  }
 }
 
 // Definir um determinado objeto como matriz identidade
-void Control::setIdentityMatrix(int objectIndex){
-  dataArray.at(objectIndex)->setIdentityMatrix();
+void Control::setIdentityMatrix(){
+  int objectIndex = 0;
+  cout << "  Escolha o indice do objeto a ser definido como matriz identidade: ";
+  cin >> objectIndex;
+  try{
+    dataArray.at(objectIndex)->setIdentityMatrix();
+    
+    cout << endl << "Modified: " << *dataArray.at(objectIndex) << endl;
+  }
+  catch(out_of_range exception){
+    cout << endl << "  Indice invalido" << endl;
+  }
 }
 
 // Mostrar menu com escolhas de ações
@@ -151,7 +175,7 @@ void Control::start()
          this->multiplyObjectsBy(*buffer);
          break;
        case 5:
-         this->setIdentityMatrix(0);
+         this->setIdentityMatrix();
          break;
      }
      
