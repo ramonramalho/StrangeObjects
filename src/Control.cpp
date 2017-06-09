@@ -37,6 +37,49 @@ Control::~Control()
    dataArray.clear();
    }
 
+
+// Comparar os objetos com um outro objeto
+void Control::compareObjectsWith(StrangeObject& value){
+   cout << " Comparing all objects against " << value << endl << endl;
+
+    for(int count = 0; count < dataArray.size(); count++)
+    {
+        if(value < *dataArray[count])
+        {
+        cout << "              " << value << endl
+             << " is less than " << (*dataArray[count]) << endl;
+        }
+        else if(value > *dataArray[count]){
+        cout << "                 " << value << endl
+             << " is greater than " << (*dataArray[count]) << endl;
+        }
+        else if(value == *dataArray[count]){
+        cout << "             " << value << endl
+             << " is equal to " << (*dataArray[count]) << endl;
+        }
+    }
+}
+
+// Somar um objeto de todos os objetos na classe
+void Control::addToObjects(StrangeObject& value){
+  // TODO
+}
+
+// Somar um objeto de todos os objetos na classe
+void Control::subtractFromObjects(StrangeObject& value){
+  // TODO
+}
+
+// Multiplicar os objetos por um outro objeto
+void Control::multiplyObjectsBy(StrangeObject& value){
+  // TODO
+}
+
+// Definir um determinado objeto como matriz identidade
+void Control::setIdentityMatrix(int objectIndex){
+  // TODO
+}
+
 void Control::start()
    {
    StrangeObject * buffer;
@@ -58,23 +101,11 @@ void Control::start()
       }
 
    buffer = dataArray.at(REFERENCE / 2);
-
+   
    cout << decorator << endl;
    cout << endl;
-   cout << " Comparing all objects against " + buffer->toString() << endl << endl;
-
-      for(int count = 0; count < dataArray.size(); count++)
-      {
-          if(buffer < dataArray[count])
-          {
-          cout << "              " << buffer->toString() << endl
-               << " is less than " << (dataArray[count]->toString()) << endl;
-          }
-          else{
-          cout << "                 " << buffer->toString() << endl
-               << " is greater than " << (dataArray[count]->toString()) << endl;
-          };
-      }
+    
+   this->compareObjectsWith(*buffer);
 
    cout << decorator << endl;
    cout << endl;
@@ -85,6 +116,7 @@ void Control::start()
 
    for(int count = dataArray.size() - 1 ; count >= 0; --count)
    {
+      
       (*dataArray[count]) = ((*dataArray[count]) + (*buffer));
       cout << "Modified: " << dataArray[count]->toString() << endl;
    }

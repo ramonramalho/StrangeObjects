@@ -31,6 +31,16 @@ public:
     Control(string);
     virtual ~Control();
     void start(); 
+    
+    void compareObjectsWith(StrangeObject& value);
+    
+    void addToObjects(StrangeObject& value);
+    
+    void subtractFromObjects(StrangeObject& value);
+    
+    void multiplyObjectsBy(StrangeObject& value);
+    
+    void setIdentityMatrix(int objectIndex);
 
 };
 

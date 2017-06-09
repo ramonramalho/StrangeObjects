@@ -224,4 +224,10 @@ StrangeObject& StrangeObject::operator*=(const StrangeObject& value) {
     return (*this);
 }
 
+// Implementar operador para impressão do objeto em stream
+//  * (StrangeObject não está sendo passado como const porque o método toString não é const)
+ostream& operator<<(ostream& os, StrangeObject& st){
+  os << st.toString();
+  return os;
+}
 

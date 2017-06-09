@@ -67,7 +67,7 @@ public:
     StrangeObject& operator-=(const StrangeObject &);
     StrangeObject& operator*=(const StrangeObject &);
     
-    friend std::ostream& operator<<(std::ostream& os, const StrangeObject& st);
+    friend std::ostream& operator<<(std::ostream& os, StrangeObject& st);
 
 };
 
