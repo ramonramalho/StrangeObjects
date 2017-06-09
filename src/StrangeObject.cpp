@@ -104,10 +104,10 @@ StrangeObject::~StrangeObject() {
  *
  */
 void StrangeObject::setIdentityMatrix(){
-	this->dataSet[0][0] = 1.0f;
-    this->dataSet[0][1] = 0.0f;
-    this->dataSet[1][0] = 0.0f;
-    this->dataSet[1][1] = 1.0f;
+  this->dataSet[0][0] = 1.0f;
+  this->dataSet[0][1] = 0.0f;
+  this->dataSet[1][0] = 0.0f;
+  this->dataSet[1][1] = 1.0f;
 }
 
 /**
@@ -162,6 +162,10 @@ StrangeObject StrangeObject::operator+(StrangeObject value) {
     return (buffer);
 }
 
+bool StrangeObject::operator<(const StrangeObject& value) {
+    return (this->localID < value.localID);
+}
+
 StrangeObject StrangeObject::operator-(StrangeObject value) {
     StrangeObject buffer;
     buffer.text = this->text + "; " + value.text;
@@ -172,6 +176,52 @@ StrangeObject StrangeObject::operator-(StrangeObject value) {
     return (buffer);
 }
 
-bool StrangeObject::operator<(const StrangeObject& value) {
-    return (this->localID < value.localID);
+StrangeObject StrangeObject::operator*(StrangeObject value) {
+    StrangeObject buffer;
+    buffer.text = this->text + "; " + value.text;
+    buffer.dataSet[0][0] = this->dataSet[0][0]*value.dataSet[0][0] + this->dataSet[0][1]*value.dataSet[1][0];
+    buffer.dataSet[0][1] = this->dataSet[0][0]*value.dataSet[0][1] + this->dataSet[0][1]*value.dataSet[1][1];
+    buffer.dataSet[1][0] = this->dataSet[1][0]*value.dataSet[0][0] + this->dataSet[1][1]*value.dataSet[1][0];
+    buffer.dataSet[1][1] = this->dataSet[1][0]*value.dataSet[0][1] + this->dataSet[1][1]*value.dataSet[1][1];
+    return (buffer);
 }
+
+bool StrangeObject::operator==(const StrangeObject& value) {
+    return (this->localID == value.localID);
+}
+
+bool StrangeObject::operator!=(const StrangeObject& value) {
+    return (this->localID != value.localID);
+}
+
+bool StrangeObject::operator>(const StrangeObject& value) {
+    return (this->localID > value.localID);
+}
+
+bool StrangeObject::operator>=(const StrangeObject& value) {
+    return (this->localID >= value.localID);
+}
+
+bool StrangeObject::operator<=(const StrangeObject& value) {
+    return (this->localID <= value.localID);
+}
+
+StrangeObject& StrangeObject::operator-=(const StrangeObject& value) {
+    this->text += "; " + value.text;
+    this->dataSet[0][0] -= value.dataSet[0][0];
+    this->dataSet[0][1] -= value.dataSet[0][1];
+    this->dataSet[1][0] -= value.dataSet[1][0];
+    this->dataSet[1][1] -= value.dataSet[1][1];
+
+    return (*this);
+}
+
+StrangeObject& StrangeObject::operator*=(const StrangeObject& value) {
+    this->text += "; " + value.text;
+    
+    (*this) = (*this) * value;
+    
+    return (*this);
+  }
+
+
