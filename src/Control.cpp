@@ -37,6 +37,104 @@ Control::~Control()
    dataArray.clear();
    }
 
+
+// Comparar os objetos com um outro objeto
+void Control::compareObjectsWith(StrangeObject& value){
+   cout << " Comparing all objects against " << value << endl << endl;
+
+    for(int count = 0; count < dataArray.size(); count++)
+    {
+        if(value < *dataArray[count])
+        {
+        cout << "              " << value << endl
+             << " is less than " << (*dataArray[count]) << endl;
+        }
+        else if(value > *dataArray[count]){
+        cout << "                 " << value << endl
+             << " is greater than " << (*dataArray[count]) << endl;
+        }
+        else if(value == *dataArray[count]){
+        cout << "             " << value << endl
+             << " is equal to " << (*dataArray[count]) << endl;
+        }
+    }
+}
+
+// Somar um objeto de todos os objetos na classe
+void Control::addToObjects(StrangeObject& value){
+  cout << " Modifying objects..." << endl << endl;
+  cout << "Ref: " << value << endl << endl;
+  
+  for(int count = dataArray.size() - 1 ; count >= 0; --count)
+  {
+     (*dataArray[count]) = ((*dataArray[count]) + (value));
+     cout << "Modified: " << *dataArray[count] << endl;
+  }
+}
+
+// Somar um objeto de todos os objetos na classe
+void Control::subtractFromObjects(StrangeObject& value){
+  cout << " Modifying objects..." << endl << endl;
+  cout << "Ref: " << value << endl << endl;
+  
+  for(int count = dataArray.size() - 1 ; count >= 0; --count)
+  {
+     (*dataArray[count]) -= value;
+     cout << "Modified: " << *dataArray[count] << endl;
+  }
+}
+
+// Multiplicar os objetos por um outro objeto
+void Control::multiplyObjectsBy(StrangeObject& value){
+  cout << " Modifying objects..." << endl << endl;
+  cout << "Ref: " << value << endl << endl;
+  
+  for(int count = dataArray.size() - 1 ; count >= 0; --count)
+  {
+     (*dataArray[count]) *= value;
+     cout << "Modified: " << *dataArray[count] << endl;
+  }
+}
+
+// Definir um determinado objeto como matriz identidade
+void Control::setIdentityMatrix(){
+  int objectIndex = 0;
+  cout << "  Escolha o indice do objeto a ser definido como matriz identidade: ";
+  cin >> objectIndex;
+  try{
+    dataArray.at(objectIndex)->setIdentityMatrix();
+    
+    cout << endl << "Modified: " << *dataArray.at(objectIndex) << endl;
+  }
+  catch(out_of_range exception){
+    cout << endl << "  Indice invalido" << endl;
+  }
+}
+
+// Mostrar menu com escolhas de ações
+// @return int Número da opção escolhida
+int Control::showMenu(){
+  int option = 0;
+  
+  cout
+  << " ========================================" << endl
+  << "   Escolha uma opcao dentre as seguintes" << endl << endl
+  << " 0. Sair" << endl
+  << " 1. Comparar objetos" << endl
+  << " 2. Somar os objetos" << endl
+  << " 3. Subtrair dos objetos" << endl
+  << " 4. Multiplicar os objetos" << endl
+  << " 5. Definir matriz como matriz identidade" << endl
+  << " > ";
+  
+  cin >> option;
+  
+  cout
+  << " ========================================" << endl;
+  
+  return option;
+}
+
 void Control::start()
    {
    StrangeObject * buffer;
@@ -50,45 +148,42 @@ void Control::start()
    cout << " Creating objects..." << endl << endl;
 
    for(int count = 0; count < REFERENCE; count++)
-      {
+   {
       sprintf(uniqueId, "%i", count);
       buffer = new StrangeObject("StrangeObj " + string(uniqueId), count, count*2, count*3, count*4);
       dataArray.push_back(buffer);
       cout << "Created: " << buffer->toString() << endl;
-      }
-
-   buffer = dataArray.at(REFERENCE / 2);
-
-   cout << decorator << endl;
-   cout << endl;
-   cout << " Comparing all objects against " + buffer->toString() << endl << endl;
-
-      for(int count = 0; count < dataArray.size(); count++)
-      {
-          if(buffer < dataArray[count])
-          {
-          cout << "              " << buffer->toString() << endl
-               << " is less than " << (dataArray[count]->toString()) << endl;
-          }
-          else{
-          cout << "                 " << buffer->toString() << endl
-               << " is greater than " << (dataArray[count]->toString()) << endl;
-          };
-      }
-
-   cout << decorator << endl;
-   cout << endl;
-   cout << " Modifying objects..." << endl << endl;
+   }
 
    buffer = new StrangeObject("Strange Ref", 2.0f, 2.0f, 2.0f, 2.0f);
-   cout << "Ref: " << buffer->toString() << endl << endl;
-
-   for(int count = dataArray.size() - 1 ; count >= 0; --count)
-   {
-      (*dataArray[count]) = ((*dataArray[count]) + (*buffer));
-      cout << "Modified: " << dataArray[count]->toString() << endl;
+   
+   int opcao = 0;
+   do{
+     opcao = this->showMenu();
+     
+     switch(opcao){
+       case 1:
+         this->compareObjectsWith(*buffer);
+         break;
+       case 2:
+         this->addToObjects(*buffer);
+         break;
+       case 3:
+         this->subtractFromObjects(*buffer);
+         break;
+       case 4:
+         this->multiplyObjectsBy(*buffer);
+         break;
+       case 5:
+         this->setIdentityMatrix();
+         break;
+     }
+     
+     cout << decorator << endl;
+     cout << endl;
    }
-   cout << decorator << endl;
-   cout << endl;
+   while(opcao != 0);
+   
+   
    delete buffer;
  }

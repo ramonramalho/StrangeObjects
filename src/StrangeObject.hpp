@@ -38,11 +38,13 @@ public:
     StrangeObject();
     StrangeObject(string, float, float, float, float);
 
-    //construtor clone
+    // Construtor de cópia
     StrangeObject(const StrangeObject& clone);
 
-    //construtor movimentação
+    // Construtor de movimento
 	  StrangeObject(StrangeObject&& move);
+    
+    void setIdentityMatrix();
 
     virtual ~StrangeObject();
 
@@ -51,10 +53,21 @@ public:
     string toString();
     StrangeObject operator=(StrangeObject);
     StrangeObject operator+(StrangeObject);
-    StrangeObject operator-(StrangeObject);
     StrangeObject& operator+=(const StrangeObject &);
     bool operator <(const StrangeObject&);
-    void setIdentityMatrix();
+    
+    StrangeObject operator-(StrangeObject);
+    StrangeObject operator*(StrangeObject);
+    
+    bool operator ==(const StrangeObject&);
+    bool operator !=(const StrangeObject&);
+    bool operator >(const StrangeObject&);
+    bool operator >=(const StrangeObject&);
+    bool operator <=(const StrangeObject&);
+    StrangeObject& operator-=(const StrangeObject &);
+    StrangeObject& operator*=(const StrangeObject &);
+    
+    friend std::ostream& operator<<(std::ostream& os, StrangeObject& st);
 
 };
 
