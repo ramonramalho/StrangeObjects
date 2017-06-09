@@ -104,10 +104,10 @@ StrangeObject::~StrangeObject() {
  *
  */
 void StrangeObject::setIdentityMatrix(){
-  this->dataSet[0][0] = 1.0f;
-  this->dataSet[0][1] = 0.0f;
-  this->dataSet[1][0] = 0.0f;
-  this->dataSet[1][1] = 1.0f;
+    this->dataSet[0][0] = 1.0f;
+    this->dataSet[0][1] = 0.0f;
+    this->dataSet[1][0] = 0.0f;
+    this->dataSet[1][1] = 1.0f;
 }
 
 /**
@@ -222,6 +222,6 @@ StrangeObject& StrangeObject::operator*=(const StrangeObject& value) {
     (*this) = (*this) * value;
     
     return (*this);
-  }
+}
 
 
