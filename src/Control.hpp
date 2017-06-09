@@ -27,14 +27,15 @@ private:
     string progName;
     vector<StrangeObject *> dataArray;
     
+	StrangeObject askForStrangeObjectData();
     
-    void compareObjectsWith(StrangeObject& value);
+    void compareObjectsWith(StrangeObject value);
     
-    void addToObjects(StrangeObject& value);
+    void addToObjects(StrangeObject value);
     
-    void subtractFromObjects(StrangeObject& value);
+    void subtractFromObjects(StrangeObject value);
     
-    void multiplyObjectsBy(StrangeObject& value);
+    void multiplyObjectsBy(StrangeObject value);
     
     void setIdentityMatrix();
     

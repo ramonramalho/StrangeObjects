@@ -41,7 +41,7 @@ Control::~Control()
 
 
 // Comparar os objetos com um outro objeto
-void Control::compareObjectsWith(StrangeObject& value){
+void Control::compareObjectsWith(StrangeObject value){
    cout << " Comparing all objects against " << value << endl << endl;
 
     for(int count = 0; count < dataArray.size(); count++)
@@ -63,7 +63,7 @@ void Control::compareObjectsWith(StrangeObject& value){
 }
 
 // Somar um objeto de todos os objetos na classe
-void Control::addToObjects(StrangeObject& value){
+void Control::addToObjects(StrangeObject value){
   cout << " Modifying objects..." << endl << endl;
   cout << "Ref: " << value << endl << endl;
   
@@ -75,7 +75,7 @@ void Control::addToObjects(StrangeObject& value){
 }
 
 // Somar um objeto de todos os objetos na classe
-void Control::subtractFromObjects(StrangeObject& value){
+void Control::subtractFromObjects(StrangeObject value){
   cout << " Modifying objects..." << endl << endl;
   cout << "Ref: " << value << endl << endl;
   
@@ -87,7 +87,7 @@ void Control::subtractFromObjects(StrangeObject& value){
 }
 
 // Multiplicar os objetos por um outro objeto
-void Control::multiplyObjectsBy(StrangeObject& value){
+void Control::multiplyObjectsBy(StrangeObject value){
   cout << " Modifying objects..." << endl << endl;
   cout << "Ref: " << value << endl << endl;
   
@@ -137,6 +137,30 @@ int Control::showMenu(){
   return option;
 }
 
+StrangeObject Control::askForStrangeObjectData(){
+	string text;
+	int a, b, c, d;
+	
+	cout
+	<< endl << "  Digite dados para criar um StrangeObject" << endl
+	<< "   Texto: ";
+	cin >> text;
+	
+	cout << "   Valor 00: ";
+	cin >> a;
+	
+	cout << "   Valor 01: ";
+	cin >> b;
+	
+	cout << "   Valor 10: ";
+	cin >> c;
+	
+	cout << "   Valor 11: ";
+	cin >> d;
+	
+	return StrangeObject(text, a, b, c, d);
+}
+
 void Control::start()
    {
    StrangeObject * buffer;
@@ -156,8 +180,6 @@ void Control::start()
       dataArray.push_back(buffer);
       cout << "Created: " << buffer->toString() << endl;
    }
-
-   buffer = new StrangeObject("Strange Ref", 2.0f, 2.0f, 2.0f, 2.0f);
    
    int opcao = 0;
    do{
@@ -165,16 +187,16 @@ void Control::start()
      
      switch(opcao){
        case 1:
-         this->compareObjectsWith(*buffer);
+         this->compareObjectsWith( this->askForStrangeObjectData() );
          break;
        case 2:
-         this->addToObjects(*buffer);
+         this->addToObjects( this->askForStrangeObjectData() );
          break;
        case 3:
-         this->subtractFromObjects(*buffer);
+         this->subtractFromObjects( this->askForStrangeObjectData() );
          break;
        case 4:
-         this->multiplyObjectsBy(*buffer);
+         this->multiplyObjectsBy( this->askForStrangeObjectData() );
          break;
        case 5:
          this->setIdentityMatrix();
@@ -186,6 +208,4 @@ void Control::start()
    }
    while(opcao != 0);
    
-   
-   delete buffer;
  }
