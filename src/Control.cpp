@@ -16,6 +16,8 @@
 #include <cstdio>
 #include "Control.hpp"
 
+#include <stdexcept>
+
 using namespace std;
 
 Control::Control(string progName)
@@ -106,7 +108,7 @@ void Control::setIdentityMatrix(){
     
     cout << endl << "Modified: " << *dataArray.at(objectIndex) << endl;
   }
-  catch(out_of_range exception){
+  catch(out_of_range e){
     cout << endl << "  Indice invalido" << endl;
   }
 }
