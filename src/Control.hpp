@@ -27,7 +27,7 @@ private:
     string progName;
     vector<StrangeObject *> dataArray;
     
-	StrangeObject askForStrangeObjectData();
+	StrangeObject askForStrangeObjectData(string);
     
     void compareObjectsWith(StrangeObject value);
     
@@ -38,7 +38,15 @@ private:
     void multiplyObjectsBy(StrangeObject value);
     
     void setIdentityMatrix();
+	
+	void sumTwoObjects();
     
+	void subtractTwoObjects();
+	
+	void multiplyTwoObjects();
+	
+	void compareTwoObjects();
+	
     int showMenu();
    
 public:

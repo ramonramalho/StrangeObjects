@@ -69,7 +69,7 @@ void Control::addToObjects(StrangeObject value){
   
   for(int count = dataArray.size() - 1 ; count >= 0; --count)
   {
-     (*dataArray[count]) = ((*dataArray[count]) + (value));
+     (*dataArray[count]) += (value);
      cout << "Modified: " << *dataArray[count] << endl;
   }
 }
@@ -119,30 +119,34 @@ int Control::showMenu(){
   int option = 0;
   
   cout
-  << " ========================================" << endl
-  << "   Escolha uma opcao dentre as seguintes" << endl << endl
+  << " =============================================" << endl
+  << "    Escolha uma opcao dentre as seguintes" << endl << endl
   << " 0. Sair" << endl
-  << " 1. Comparar objetos" << endl
-  << " 2. Somar os objetos" << endl
-  << " 3. Subtrair dos objetos" << endl
-  << " 4. Multiplicar os objetos" << endl
-  << " 5. Definir matriz como matriz identidade" << endl
+  << " 1. Comparar todos os objetos com outro" << endl
+  << " 2. Somar todos os objetos com outro" << endl
+  << " 3. Subtrair um objeto de todos objetos" << endl
+  << " 4. Multiplicar todos os objetos por um outro" << endl
+  << " 5. Definir um objeto com a matriz identidade" << endl
+  << " 6. Somar dois objetos" << endl
+  << " 7. Subtrair dois objetos" << endl
+  << " 8. Multiplicar dois objetos" << endl
+  << " 9. Comparar dois objetos" << endl
   << " > ";
   
   cin >> option;
   
   cout
-  << " ========================================" << endl;
+  << " =============================================" << endl;
   
   return option;
 }
 
-StrangeObject Control::askForStrangeObjectData(){
+StrangeObject Control::askForStrangeObjectData(string mensagem){
 	string text;
-	int a, b, c, d;
+	int a=0, b=0, c=0, d=0;
 	
 	cout
-	<< endl << "  Digite dados para criar um StrangeObject" << endl
+	<< endl << "  " << mensagem << endl << endl
 	<< "   Texto: ";
 	cin >> text;
 	
@@ -157,8 +161,67 @@ StrangeObject Control::askForStrangeObjectData(){
 	
 	cout << "   Valor 11: ";
 	cin >> d;
+	cout << endl;
 	
 	return StrangeObject(text, a, b, c, d);
+}
+
+void Control::sumTwoObjects(){
+	StrangeObject a = this->askForStrangeObjectData("Primeiro objeto");
+	StrangeObject b = this->askForStrangeObjectData("Segundo objeto");
+	
+	StrangeObject sum = a+b;
+	
+	cout << "   Soma: " << endl << "  " << sum;
+}
+
+void Control::subtractTwoObjects(){
+	StrangeObject a = this->askForStrangeObjectData("Primeiro objeto");
+	StrangeObject b = this->askForStrangeObjectData("Segundo objeto");
+	
+	StrangeObject diff = a-b;
+	
+	cout << "   Diferenca: " << "  " << diff;
+}
+
+void Control::multiplyTwoObjects(){
+	StrangeObject a = this->askForStrangeObjectData("Primeiro objeto");
+	StrangeObject b = this->askForStrangeObjectData("Segundo objeto");
+	
+	StrangeObject diff = a-b;
+	
+	cout << "   Produto: " << "  " << diff;
+}
+
+
+void Control::compareTwoObjects(){
+	StrangeObject a = this->askForStrangeObjectData("Primeiro objeto");
+	StrangeObject b = this->askForStrangeObjectData("Segundo objeto");
+	
+    for(int count = 0; count < dataArray.size(); count++)
+    {
+        if(a < b)
+        {
+        cout << "              " << a << endl
+             << " is less than " << b << endl;
+        }
+        else if(a > b){
+        cout << "                 " << a << endl
+             << " is greater than " << b << endl;
+        }
+        else if(a == b){
+        cout << "             " << a << endl
+             << " is equal to " << b << endl;
+        }
+        else if(a <= b){
+        cout << "                     " << a << endl
+             << " is less or equal to " << b << endl;
+        }
+        else if(a >= b){
+        cout << "                       " << a << endl
+             << " is bigger or equal to " << b << endl;
+        }
+    }
 }
 
 void Control::start()
@@ -187,20 +250,45 @@ void Control::start()
      
      switch(opcao){
        case 1:
-         this->compareObjectsWith( this->askForStrangeObjectData() );
+		 cout << "  Comparar todos os objetos com outro" << endl;
+         this->compareObjectsWith(
+			this->askForStrangeObjectData("Digite os dados de um StrangeObject para comparar com os outros")
+		 );
          break;
        case 2:
-         this->addToObjects( this->askForStrangeObjectData() );
+		 cout << "  Somar todos os objetos com outro" << endl;
+         this->addToObjects(
+			this->askForStrangeObjectData("Digite os dados de um StrangeObject para somar aos outros")
+		 );
          break;
        case 3:
-         this->subtractFromObjects( this->askForStrangeObjectData() );
+		 cout << "  Subtrair um objeto de todos os objetos" << endl;
+         this->subtractFromObjects(
+			this->askForStrangeObjectData("Digite os dados de um StrangeObject para subtrair dos outros")
+		 );
          break;
        case 4:
-         this->multiplyObjectsBy( this->askForStrangeObjectData() );
+		 cout << "  Multiplicar todos os objetos por outro" << endl;
+         this->multiplyObjectsBy(
+			this->askForStrangeObjectData("Digite os dados de um StrangeObject para multiplicar os outros")
+		 );
          break;
        case 5:
+		 cout << "  Definir um objeto com matriz identidade" << endl;
          this->setIdentityMatrix();
          break;
+	   case 6:
+		 cout << "  Somar dois objetos" << endl;
+		 this->sumTwoObjects();;
+	   case 7:
+		 cout << "  Subtrair dois objetos" << endl;
+		 this->subtractTwoObjects();
+	   case 8:
+		 cout << "  Multiplicar dois objetos" << endl;
+		 this->multiplyTwoObjects();
+	   case 9:
+		 cout << "  Comparar dois objetos" << endl;
+		 this->compareTwoObjects();
      }
      
      cout << decorator << endl;
