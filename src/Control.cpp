@@ -176,36 +176,88 @@ StrangeObject Control::askForStrangeObjectData(string mensagem){
 }
 
 void Control::sumTwoObjects(){
-	StrangeObject a = this->askForStrangeObjectData("Primeiro objeto");
-	StrangeObject b = this->askForStrangeObjectData("Segundo objeto");
+	int indiceA = 0, indiceB = 0;
+	cout << "  Indice do primeiro objeto: ";
+	cin >> indiceA;
+	cout << "  Indice do segundo objeto: ";
+	cin >> indiceB;
+	
+	StrangeObject a, b;
+	
+	try{
+		a = *dataArray.at(indiceA);
+		b = *dataArray.at(indiceB);
+	}
+	catch(out_of_range e){
+		cout << endl << "  Algum dos objetos nao foi encontrado" << endl;
+	}
 	
 	StrangeObject sum = a+b;
 	
-	cout << "   Soma: " << endl << "  " << sum;
+	cout << "   Soma: " << endl << "  " << sum << endl;
 }
 
 void Control::subtractTwoObjects(){
-	StrangeObject a = this->askForStrangeObjectData("Primeiro objeto");
-	StrangeObject b = this->askForStrangeObjectData("Segundo objeto");
+	int indiceA = 0, indiceB = 0;
+	cout << "  Indice do primeiro objeto: ";
+	cin >> indiceA;
+	cout << "  Indice do segundo objeto: ";
+	cin >> indiceB;
+	
+	StrangeObject a, b;
+	
+	try{
+		a = *dataArray.at(indiceA);
+		b = *dataArray.at(indiceB);
+	}
+	catch(out_of_range e){
+		cout << endl << "  Algum dos objetos nao foi encontrado" << endl;
+	}
 	
 	StrangeObject diff = a-b;
 	
-	cout << "   Diferenca: " << "  " << diff;
+	cout << "   Diferenca: " << "  " << diff << endl;
 }
 
 void Control::multiplyTwoObjects(){
-	StrangeObject a = this->askForStrangeObjectData("Primeiro objeto");
-	StrangeObject b = this->askForStrangeObjectData("Segundo objeto");
+	int indiceA = 0, indiceB = 0;
+	cout << "  Indice do primeiro objeto: ";
+	cin >> indiceA;
+	cout << "  Indice do segundo objeto: ";
+	cin >> indiceB;
 	
-	StrangeObject diff = a-b;
+	StrangeObject a, b;
 	
-	cout << "   Produto: " << "  " << diff;
+	try{
+		a = *dataArray.at(indiceA);
+		b = *dataArray.at(indiceB);
+	}
+	catch(out_of_range e){
+		cout << endl << "  Algum dos objetos nao foi encontrado" << endl;
+	}
+	
+	StrangeObject mul = a-b;
+	
+	cout << "   Produto: " << "  " << mul << endl;
 }
 
 
 void Control::compareTwoObjects(){
-	StrangeObject a = this->askForStrangeObjectData("Primeiro objeto");
-	StrangeObject b = this->askForStrangeObjectData("Segundo objeto");
+	int indiceA = 0, indiceB = 0;
+	cout << "  Indice do primeiro objeto: ";
+	cin >> indiceA;
+	cout << "  Indice do segundo objeto: ";
+	cin >> indiceB;
+	
+	StrangeObject a, b;
+	
+	try{
+		a = *dataArray.at(indiceA);
+		b = *dataArray.at(indiceB);
+	}
+	catch(out_of_range e){
+		cout << endl << "  Algum dos objetos nao foi encontrado" << endl;
+	}
 	
     for(int count = 0; count < dataArray.size(); count++)
     {
@@ -289,18 +341,23 @@ void Control::start()
 	   case 6:
 		 cout << "  Somar dois objetos" << endl;
 		 this->sumTwoObjects();;
+         break;
 	   case 7:
 		 cout << "  Subtrair dois objetos" << endl;
 		 this->subtractTwoObjects();
+         break;
 	   case 8:
 		 cout << "  Multiplicar dois objetos" << endl;
 		 this->multiplyTwoObjects();
+         break;
 	   case 9:
 		 cout << "  Comparar dois objetos" << endl;
 		 this->compareTwoObjects();
+         break;
 	   case 10:
 		 cout << "  Imprimir todos os objetos" << endl;
 		 this->printAllObjects();
+         break;
      }
      
      cout << decorator << endl;
