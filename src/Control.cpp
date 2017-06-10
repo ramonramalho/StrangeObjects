@@ -113,6 +113,14 @@ void Control::setIdentityMatrix(){
   }
 }
 
+void Control::printAllObjects(){
+   cout << endl;
+   for(int i = 0; i < dataArray.size(); i++)
+   {
+      cout << " " << *dataArray.at(i)<< endl;
+   }
+}
+
 // Mostrar menu com escolhas de ações
 // @return int Número da opção escolhida
 int Control::showMenu(){
@@ -131,6 +139,7 @@ int Control::showMenu(){
   << " 7. Subtrair dois objetos" << endl
   << " 8. Multiplicar dois objetos" << endl
   << " 9. Comparar dois objetos" << endl
+  << " 10. Imprimir todos os objetos" << endl
   << " > ";
   
   cin >> option;
@@ -289,6 +298,9 @@ void Control::start()
 	   case 9:
 		 cout << "  Comparar dois objetos" << endl;
 		 this->compareTwoObjects();
+	   case 10:
+		 cout << "  Imprimir todos os objetos" << endl;
+		 this->printAllObjects();
      }
      
      cout << decorator << endl;

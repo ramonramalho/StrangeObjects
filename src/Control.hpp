@@ -47,6 +47,8 @@ private:
 	
 	void compareTwoObjects();
 	
+	void printAllObjects();
+	
     int showMenu();
    
 public:
