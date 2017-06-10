@@ -259,30 +259,27 @@ void Control::compareTwoObjects(){
 		cout << endl << "  Algum dos objetos nao foi encontrado" << endl;
 	}
 	
-    for(int count = 0; count < dataArray.size(); count++)
-    {
-        if(a < b)
-        {
-        cout << "              " << a << endl
-             << " is less than " << b << endl;
-        }
-        else if(a > b){
-        cout << "                 " << a << endl
-             << " is greater than " << b << endl;
-        }
-        else if(a == b){
-        cout << "             " << a << endl
-             << " is equal to " << b << endl;
-        }
-        else if(a <= b){
-        cout << "                     " << a << endl
-             << " is less or equal to " << b << endl;
-        }
-        else if(a >= b){
-        cout << "                       " << a << endl
-             << " is bigger or equal to " << b << endl;
-        }
-    }
+	if(a < b)
+	{
+	cout << "              " << a << endl
+		 << " is less than " << b << endl;
+	}
+	else if(a > b){
+	cout << "                 " << a << endl
+		 << " is greater than " << b << endl;
+	}
+	else if(a == b){
+	cout << "             " << a << endl
+		 << " is equal to " << b << endl;
+	}
+	else if(a <= b){
+	cout << "                     " << a << endl
+		 << " is less or equal to " << b << endl;
+	}
+	else if(a >= b){
+	cout << "                       " << a << endl
+		 << " is bigger or equal to " << b << endl;
+	}
 }
 
 void Control::start()
